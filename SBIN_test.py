@@ -1,12 +1,12 @@
 import yfinance as yf
 import time 
 sbin=yf.Ticker("SBIN.NS")
-data=sbin.history(period='1mo')
+# data=sbin.history(period='1mo')
 # print(data)
-average_price=data['Close'].mean()
-print(average_price)
-data['SMA_5']=data['Close'].rolling(window=5).mean()
-print(data['SMA_5'])
+# average_price=data['Close'].mean()
+# print(average_price)
+# data['SMA_5']=data['Close'].rolling(window=5).mean()
+# print(data['SMA_5'])
 # kaise hum latest day ka price nikale 
 # current_price=data['Close'].iloc[-1]
 '''
