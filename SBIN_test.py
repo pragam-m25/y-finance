@@ -17,6 +17,6 @@ data['Close']: Humne puri table mein se sirf 'Close' price wali line uthayi.
 '''
 current_price_sma5=data['SMA_5'].iloc[-1]
 if current_price > current_price_sma5:
-    print("market is high ,sell")
+    print("market is high ,buy karo trend follow")
 else:
-    print("market is low ,buy")
+    print("market is low ,sell trend stop")
