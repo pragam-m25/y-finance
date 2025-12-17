@@ -4,3 +4,19 @@ data=sbin.history(period='1mo')
 # print(data)
 average_price=data['Close'].mean()
 print(average_price)
+data['SMA_5']=data['Close'].rolling(window=5).mean()
+print(data['SMA_5'])
+# kaise hum latest day ka price nikale 
+current_price=data['Close'].iloc[-1]
+'''
+data['Close']: Humne puri table mein se sirf 'Close' price wali line uthayi.
+
+.iloc: Humne kaha "Mujhe specific location par jana hai."
+
+[-1]: Humne kaha "Last wala de." (Agar -2 likhte toh kal ka milta, -3 likhte toh parso ka).
+'''
+current_price_sma5=data['SMA_5'].iloc[-1]
+if current_price > current_price_sma5:
+    print("market is high ,sell")
+else:
+    print("market is low ,buy")
