@@ -6,3 +6,10 @@ Ab Toolbox khul gaya. Par Python ko sapna thodi aayega ki tujhe Reliance ka data
 Step 3: .history() (Report Card Maangna)
 Ab tere haath mein Tata Motors ki file (tata) aa gayi hai. Ab tu us file se Price nikalega. Price nikalne ke liye hum bolte hain: "History dikhao".
 '''
+'''
+data['Close']: Humne puri table mein se sirf 'Close' price wali line uthayi.
+
+.iloc: Humne kaha "Mujhe specific location par jana hai."
+
+[-1]: Humne kaha "Last wala de." (Agar -2 likhte toh kal ka milta, -3 likhte toh parso ka).
+'''
