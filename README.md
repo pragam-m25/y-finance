@@ -13,3 +13,7 @@ data['Close']: Humne puri table mein se sirf 'Close' price wali line uthayi.
 
 [-1]: Humne kaha "Last wala de." (Agar -2 likhte toh kal ka milta, -3 likhte toh parso ka).
 '''
+
+ current_price=data['Close'].iloc[-1] #ye current price nikalega 
+ current_price_sma5=data['SMA_5'].iloc[-1] #ye last 5 days ka moving average nikalega 
+ time.sleep(60)#ye code execution ko pause karega 60 seconds ke liye
