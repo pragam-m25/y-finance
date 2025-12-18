@@ -11,6 +11,8 @@ def making_decision():
     global balance, is_stock_held, buy_price
     while True:
         print("checking Market...")
+        
+        data = sbin.history(period='1d', interval='1m')
         if len(data)==0:
             print("⚠️ Data nahi aaya (Yahoo error). 5 second ruk kar wapas try karenge...")
             time.sleep(5)
