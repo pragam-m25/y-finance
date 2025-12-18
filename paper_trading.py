@@ -30,7 +30,25 @@ def save_data():
             print("data saved succesefully")
     except Exception as e:
         print(f"Error saving data {e} ")
-        
+
+def load_data():
+    global balance, is_stock_held, buy_price,qty,sl_price,targetprice
+    try:
+        with open ("trade_data.json","r") as f:
+            data=json.load(f)
+            balance=data['balance']
+            qty=data['qty']
+            buy_price=data['buy_price']
+            is_stock_held=data["is_stock_held"]
+            sl_price=data['sl_price']
+            targetprice=data['targetprice']
+    except FileNotFoundError as e :
+        print(f"Error:--> {e}")
+
+
+    
+
+
 def making_decision():
     global balance, is_stock_held, buy_price,qty,sl_price,targetprice
     while True:
@@ -60,6 +78,7 @@ def making_decision():
             print(f"💰 Wallet Balance: ₹{round(balance, 2)}")
             sl_price=buy_price-(buy_price*0.01)
             targetprice=buy_price+(buy_price*0.02)
+            save_data()
 
         elif is_stock_held == True:
             if (current_price <= sl_price):
@@ -74,6 +93,7 @@ def making_decision():
                 print(f"Sold all shares @ ₹{round(current_price, 2)}")
                 print(f"Total Profit/Loss: ₹{round(total_profit, 2)}")
                 print(f"New Wallet Balance: ₹{round(balance, 2)}")
+                save_data()
 
             elif  (current_price >=targetprice):
                 print("target hit earned money")
@@ -87,6 +107,7 @@ def making_decision():
                 print(f"Sold all shares @ ₹{round(current_price, 2)}")
                 print(f" Total Profit/Loss: ₹{round(total_profit, 2)}")
                 print(f"New Wallet Balance: ₹{round(balance, 2)}")
+                save_data()
 
             elif current_price<current_sma :
                 print("SELL MARKET IS LOW")
@@ -99,6 +120,7 @@ def making_decision():
                 print(f" Sold all shares @ ₹{round(current_price, 2)}")
                 print(f" Total Profit/Loss: ₹{round(total_profit, 2)}")
                 print(f" New Wallet Balance: ₹{round(balance, 2)}")
+                save_data()
 
             else :
                 current_value = current_price * qty
@@ -106,11 +128,14 @@ def making_decision():
                 unrealized_pnl = current_value - buy_value
                 print(f"HOLDING {qty} Shares... (SL: {round(sl_price,2)} | TP: {round(targetprice,2)})")
                 print(f"   Abhi ka Status: ₹{round(unrealized_pnl, 2)} (Agar abhi becha toh)")
+                save_data()
 
         else:
                 print(" Kuch nahi karna (Waiting...)")
 
         print("Waiting 60 seconds...")
         time.sleep(60)
+
+load_data()
 
 making_decision()
