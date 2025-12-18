@@ -5,10 +5,13 @@ sbin=yf.Ticker("SBIN.NS")
 balance=10000
 is_stock_held=False
 buy_price=0
+qty=0
+print("🚀 HEAVY DRIVER BOT STARTED...")
+print(f"💰 Initial Balance: ₹{balance}")
 # Step 2: Loop aur Live Data (Dil ki Dhadkan)
 # Ab humein wo loop banana hai jo har minute  market se naya data laaye 
 def making_decision():
-    global balance, is_stock_held, buy_price
+    global balance, is_stock_held, buy_price,qty
     while True:
         print("checking Market...")
 
@@ -27,22 +30,35 @@ def making_decision():
         print(f"Price: {round(current_price,2)} | SMA: {round(current_sma,2)}")
         if current_price > current_sma and is_stock_held == False :
             print("BUY MARKET IS HIGH")
-            balance=balance-current_price
+            qty = int(balance / current_price)
+            cost = qty * current_price
+            balance=balance-cost
             is_stock_held=True
             buy_price = current_price
-            print(f"New Balance: {round(balance, 2)}")
-            
+            print(f"👉 Bought {qty} shares @ ₹{round(current_price, 2)}")
+            print(f"💰 Wallet Balance: ₹{round(balance, 2)}")
+
         elif current_price<current_sma and is_stock_held == True:
             print("SELL MARKET IS LOW")
-            balance=balance+current_price
+            sell_value = qty * current_price
+            balance = balance + sell_value
+            total_profit = (current_price - buy_price) * qty
             is_stock_held=False
+            qty = 0
             # profit/loss
-            pnl = current_price - buy_price
-            print(f"Profit/Loss: {round(pnl, 2)}")
-            print(f"New Balance: {round(balance, 2)}")
+            print(f"👉 Sold all shares @ ₹{round(current_price, 2)}")
+            print(f"🤑 Total Profit/Loss: ₹{round(total_profit, 2)}")
+            print(f"💰 New Wallet Balance: ₹{round(balance, 2)}")
 
         else:
-            print("⚪ Kuch nahi karna (Waiting...)")
+            if is_stock_held==True:
+                current_value = current_price * qty
+                buy_value = buy_price * qty
+                unrealized_pnl = current_value - buy_value
+                print(f"🔵 HOLDING {qty} Shares...")
+                print(f"   Abhi ka Status: ₹{round(unrealized_pnl, 2)} (Agar abhi becha toh)")
+            else:
+                print("⚪ Kuch nahi karna (Waiting...)")
 
         print("Waiting 60 seconds...")
         time.sleep(60)
