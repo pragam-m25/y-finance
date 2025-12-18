@@ -10,8 +10,9 @@ print("🚀 HEAVY DRIVER BOT STARTED...")
 print(f"💰 Initial Balance: ₹{balance}")
 # Step 2: Loop aur Live Data (Dil ki Dhadkan)
 # Ab humein wo loop banana hai jo har minute  market se naya data laaye 
+
 def making_decision():
-    global balance, is_stock_held, buy_price,qty
+    global balance, is_stock_held, buy_price,qty,sl_price,targetprice
     while True:
         print("checking Market...")
 
@@ -37,18 +38,47 @@ def making_decision():
             buy_price = current_price
             print(f"👉 Bought {qty} shares @ ₹{round(current_price, 2)}")
             print(f"💰 Wallet Balance: ₹{round(balance, 2)}")
+            sl_price=buy_price-(buy_price*0.01)
+            targetprice=buy_price+(buy_price*0.02)
 
-        elif current_price<current_sma and is_stock_held == True:
-            print("SELL MARKET IS LOW")
-            sell_value = qty * current_price
-            balance = balance + sell_value
-            total_profit = (current_price - buy_price) * qty
-            is_stock_held=False
-            qty = 0
-            # profit/loss
-            print(f"👉 Sold all shares @ ₹{round(current_price, 2)}")
-            print(f"🤑 Total Profit/Loss: ₹{round(total_profit, 2)}")
-            print(f"💰 New Wallet Balance: ₹{round(balance, 2)}")
+        elif is_stock_held == True:
+            if (current_price <= sl_price):
+                print("stop loss is hitting ")
+                print("SELL MARKET IS LOW")
+                sell_value = qty * current_price
+                balance = balance + sell_value
+                total_profit = (current_price - buy_price) * qty
+                is_stock_held=False
+                qty = 0
+                # profit/loss
+                print(f"👉 Sold all shares @ ₹{round(current_price, 2)}")
+                print(f"🤑 Total Profit/Loss: ₹{round(total_profit, 2)}")
+                print(f"💰 New Wallet Balance: ₹{round(balance, 2)}")
+
+            elif  (current_price >=targetprice):
+                print("target hit earned money")
+                print("SELL MARKET IS LOW")
+                sell_value = qty * current_price
+                balance = balance + sell_value
+                total_profit = (current_price - buy_price) * qty
+                is_stock_held=False
+                qty = 0
+                # profit/loss
+                print(f"👉 Sold all shares @ ₹{round(current_price, 2)}")
+                print(f"🤑 Total Profit/Loss: ₹{round(total_profit, 2)}")
+                print(f"💰 New Wallet Balance: ₹{round(balance, 2)}")
+
+            elif current_price<current_sma :
+                print("SELL MARKET IS LOW")
+                sell_value = qty * current_price
+                balance = balance + sell_value
+                total_profit = (current_price - buy_price) * qty
+                is_stock_held=False
+                qty = 0
+                # profit/loss
+                print(f"👉 Sold all shares @ ₹{round(current_price, 2)}")
+                print(f"🤑 Total Profit/Loss: ₹{round(total_profit, 2)}")
+                print(f"💰 New Wallet Balance: ₹{round(balance, 2)}")
 
         else:
             if is_stock_held==True:
