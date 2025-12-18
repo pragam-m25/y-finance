@@ -17,3 +17,39 @@ data['Close']: Humne puri table mein se sirf 'Close' price wali line uthayi.
  current_price=data['Close'].iloc[-1] #ye current price nikalega 
  current_price_sma5=data['SMA_5'].iloc[-1] #ye last 5 days ka moving average nikalega 
  time.sleep(60)#ye code execution ko pause karega 60 seconds ke liye
+
+ my bot performance 🚀 HEAVY DRIVER BOT STARTED...
+💰 Initial Balance: ₹10000
+checking Market...
+Price: 979.55 | SMA: 979.51
+BUY MARKET IS HIGH
+👉 Bought 10 shares @ ₹979.55
+💰 Wallet Balance: ₹204.5
+Waiting 60 seconds...
+checking Market...
+Price: 979.25 | SMA: 979.4
+SELL MARKET IS LOW
+👉 Sold all shares @ ₹979.25
+🤑 Total Profit/Loss: ₹-3.0
+💰 New Wallet Balance: ₹9997.0
+Waiting 60 seconds...
+checking Market...
+Price: 979.4 | SMA: 979.38
+BUY MARKET IS HIGH
+👉 Bought 10 shares @ ₹979.4
+💰 Wallet Balance: ₹203.0
+Waiting 60 seconds...
+checking Market...
+Price: 979.65 | SMA: 979.49
+🔵 HOLDING 10 Shares... (SL: 969.61 | TP: 998.99)
+   Abhi ka Status: ₹2.5 (Agar abhi becha toh)
+Waiting 60 seconds...
+checking Market...
+Price: 979.6 | SMA: 979.49
+🔵 HOLDING 10 Shares... (SL: 969.61 | TP: 998.99)
+   Abhi ka Status: ₹2.0 (Agar abhi becha toh)
+Waiting 60 seconds...
+Price: 979.8 | SMA: 979.63
+🔵 HOLDING 10 Shares... (SL: 969.61 | TP: 998.99)
+   Abhi ka Status: ₹4.0 (Agar abhi becha toh)
+Waiting 60 seconds...

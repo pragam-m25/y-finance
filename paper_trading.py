@@ -6,6 +6,8 @@ balance=10000
 is_stock_held=False
 buy_price=0
 qty=0
+sl_price=0
+targetprice=0
 print("🚀 HEAVY DRIVER BOT STARTED...")
 print(f"💰 Initial Balance: ₹{balance}")
 # Step 2: Loop aur Live Data (Dil ki Dhadkan)
@@ -80,14 +82,14 @@ def making_decision():
                 print(f"🤑 Total Profit/Loss: ₹{round(total_profit, 2)}")
                 print(f"💰 New Wallet Balance: ₹{round(balance, 2)}")
 
-        else:
-            if is_stock_held==True:
+            else :
                 current_value = current_price * qty
                 buy_value = buy_price * qty
                 unrealized_pnl = current_value - buy_value
-                print(f"🔵 HOLDING {qty} Shares...")
+                print(f"🔵 HOLDING {qty} Shares... (SL: {round(sl_price,2)} | TP: {round(targetprice,2)})")
                 print(f"   Abhi ka Status: ₹{round(unrealized_pnl, 2)} (Agar abhi becha toh)")
-            else:
+
+        else:
                 print("⚪ Kuch nahi karna (Waiting...)")
 
         print("Waiting 60 seconds...")
