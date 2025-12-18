@@ -22,7 +22,7 @@ def making_decision():
             continue
         
 
-        data=sbin.history(period="1d",interval="1m")
+        # data=sbin.history(period="1d",interval="1m")
         data['SMA5']=data['Close'].rolling(window=5).mean()
         current_price=data["Close"].iloc[-1]
         current_sma=data["SMA5"].iloc[-1]
