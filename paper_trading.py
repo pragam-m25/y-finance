@@ -13,5 +13,16 @@ def making_decision():
         data['SMA5']=data['close'].rolling(window=5).mean()
         current_price=data["close"].iloc[-1]
         current_sma=data["SMA5"].iloc[-1]
-        
+
         print(f"Price: {current_price} | SMA: {current_sma}")
+        if current_price > current_sma and is_stock_held == False :
+            print("BUY MARKET IS HIGH")
+            balance=balance-current_price
+            is_stock_held=True
+        elif current_price<current_sma and is_stock_held == True:
+            print("SELL MARKET IS LOW")
+            balance=balance+current_price
+            is_stock_held=False
+
+        print("Waiting 60 seconds...")
+        time.sleep(60)
