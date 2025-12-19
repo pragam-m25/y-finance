@@ -2,15 +2,15 @@ import yfinance as yf
 import time
 import json 
 # ticker banaya kyuki ye us stock ka id card hain iski help se wo data lekar ayega wo pura
-sbin=yf.Ticker("SBIN.NS")
-balance=10000
+sbin=yf.Ticker("BTC-USD")
+balance=100000
 is_stock_held=False
 buy_price=0
 qty=0
 sl_price=0
 targetprice=0
 print(" HEAVY DRIVER BOT STARTED...")
-print(f" Initial Balance: ₹{balance}")
+print(f" Initial Balance: ${balance}")
 # Step 2: Loop aur Live Data (Dil ki Dhadkan)
 # Ab humein wo loop banana hai jo har minute  market se naya data laaye 
 
@@ -56,7 +56,7 @@ def making_decision():
 
         data = sbin.history(period='1d', interval='1m')
         if len(data)==0:
-            print("⚠️ Data nahi aaya (Yahoo error). 5 second ruk kar wapas try karenge...")
+            print(" Data nahi aaya (Yahoo error). 5 second ruk kar wapas try karenge...")
             time.sleep(5)
             continue
         
@@ -74,8 +74,8 @@ def making_decision():
             balance=balance-cost
             is_stock_held=True
             buy_price = current_price
-            print(f"👉 Bought {qty} shares @ ₹{round(current_price, 2)}")
-            print(f"💰 Wallet Balance: ₹{round(balance, 2)}")
+            print(f"Bought {qty} shares @ ${round(current_price, 2)}")
+            print(f" Wallet Balance: ${round(balance, 2)}")
             sl_price=buy_price-(buy_price*0.01)
             targetprice=buy_price+(buy_price*0.02)
             save_data()
@@ -90,9 +90,9 @@ def making_decision():
                 is_stock_held=False
                 qty = 0
                 # profit/loss
-                print(f"Sold all shares @ ₹{round(current_price, 2)}")
-                print(f"Total Profit/Loss: ₹{round(total_profit, 2)}")
-                print(f"New Wallet Balance: ₹{round(balance, 2)}")
+                print(f"Sold all shares @ ${round(current_price, 2)}")
+                print(f"Total Profit/Loss: ${round(total_profit, 2)}")
+                print(f"New Wallet Balance: ${round(balance, 2)}")
                 save_data()
 
             elif  (current_price >=targetprice):
@@ -104,9 +104,9 @@ def making_decision():
                 is_stock_held=False
                 qty = 0
                 # profit/loss
-                print(f"Sold all shares @ ₹{round(current_price, 2)}")
-                print(f" Total Profit/Loss: ₹{round(total_profit, 2)}")
-                print(f"New Wallet Balance: ₹{round(balance, 2)}")
+                print(f"Sold all shares @ ${round(current_price, 2)}")
+                print(f" Total Profit/Loss: ${round(total_profit, 2)}")
+                print(f"New Wallet Balance: ${round(balance, 2)}")
                 save_data()
 
             elif current_price<current_sma :
@@ -117,9 +117,9 @@ def making_decision():
                 is_stock_held=False
                 qty = 0
                 # profit/loss
-                print(f" Sold all shares @ ₹{round(current_price, 2)}")
-                print(f" Total Profit/Loss: ₹{round(total_profit, 2)}")
-                print(f" New Wallet Balance: ₹{round(balance, 2)}")
+                print(f" Sold all shares @ ${round(current_price, 2)}")
+                print(f" Total Profit/Loss: ${round(total_profit, 2)}")
+                print(f" New Wallet Balance: ${round(balance, 2)}")
                 save_data()
 
             else :
@@ -127,8 +127,8 @@ def making_decision():
                 buy_value = buy_price * qty
                 unrealized_pnl = current_value - buy_value
                 print(f"HOLDING {qty} Shares... (SL: {round(sl_price,2)} | TP: {round(targetprice,2)})")
-                print(f"   Abhi ka Status: ₹{round(unrealized_pnl, 2)} (Agar abhi becha toh)")
-                save_data()
+                print(f"   Abhi ka Status: ${round(unrealized_pnl, 2)} (Agar abhi becha toh)")
+                
 
         else:
                 print(" Kuch nahi karna (Waiting...)")
